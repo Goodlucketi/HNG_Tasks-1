@@ -15,8 +15,23 @@ function prime(num){
     return true
 }
 
-function even(num){
-    return num % 2 === 0 ? "Even Number" : "Odd Number"
+function isArmstrongEvenOrOdd(num){
+    const numStr = num.toString()
+    const numLength = numStr.length
+
+    let sum = 0
+    for(let i=0; i<=numLength; i++){
+        sum += Math.pow(Number(numStr[i]), numLength)
+    }
+    const isArmStrong = sum === num
+
+    const isEven = num % 2 === 0
+
+    if(isArmStrong){
+        return isEven ? ["Armstrong", "Even"] : ["Armstrong", "Odd"]
+    }else{
+        return isEven ? ["Not Armstrong", "Even"] : ["Not Armstrong", "Odd"]
+    }
 }
 
 function sumOfDigits(num){
@@ -62,7 +77,7 @@ app.get('/api/classify-number', (req, res)=>{
         "number": num,
         "is_prime": prime(num),
         "is_perfect": perfectNumber(num),
-        "properties": even(num),
+        "properties": isArmstrongEvenOrOdd(num),
         "digit_sum": sumOfDigits(num),  // sum of its digits
         "fun_fact": generateFunFact(num)
     }
