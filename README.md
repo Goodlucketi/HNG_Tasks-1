@@ -9,7 +9,7 @@ the function that checks for perfect numbers
 function that returns the sum of the digits of a number
 and also a function that dynamically creates fun facts for numbers depending on their prooperties.
 
-API Endpoint URL: http://localhost:3000/api/classify-number?number=371
+API Endpoint URL: https://hng-tasks-1-npan.onrender.com/api/classify-number?number=501
 
 
 Response:
@@ -21,10 +21,10 @@ JSON Response 400 (Bad Request)
 
 JSON Response 200(OK)
 {
-    "number": 371,
-    "is_prime": false,
-    "is_perfect": false,
-    "properties": ["armstrong", "odd"],
-    "digit_sum": 11,  // sum of its digits
-    "fun_fact": "371 is an Armstrong number "
+     "number": 501,
+  "is_prime": false,
+  "is_perfect": false,
+  "properties": ["Not Armstrong", "Odd"],
+  "digit_sum": 6,
+  "fun_fact": "501 is an odd number, not divisible by 2."
 }
