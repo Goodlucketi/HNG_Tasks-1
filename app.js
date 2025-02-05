@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const axios = require('axios')
 const port = 3000
 
 const app = express()
@@ -48,23 +49,22 @@ function perfectNumber(num){
     return sum === num
 }
 
-function generateFunFact(num) {
-    if (num === 0) return "Zero is the only real number that is neither positive nor negative.";
-    if (num === 1) return "One is the multiplicative identity in mathematics.";
-    if (prime(num)) return `${num} is a prime number, only divisible by 1 and itself.`;
-    if (num % 10 === 0) return `${num} is a multiple of ten, often used in rounding numbers.`;
-    if (num % 2 === 0) return `${num} is an even number, divisible by 2.`;
-    if (num % 2 !== 0) return `${num} is an odd number, not divisible by 2.`;
-    if (num > 0 && Math.sqrt(num) % 1 === 0) return `${num} is a perfect square.`;
-    if (num < 0) return `${num} is a negative number, and its absolute value is ${Math.abs(num)}.`;
-    return `No specific fun fact, but ${num} is a fascinating number in its own way!`;
+async function generateFunFact(num) {
+    try {
+        const response = await axios.get(`http://numbersapi.com/${num}?json`)
+        return response.data.text // Get the fun fact text from the API response
+    } catch (error) {
+        console.error("Error fetching fun fact:", error)
+        return `No specific fun fact found for ${num}.`
+    }
 }
+
 
 app.get('/', (req, res)=> {
     res.send("Numbers api")
 })
 
-app.get('/api/classify-number', (req, res)=>{
+app.get('/api/classify-number', async (req, res)=>{
     let num = parseInt(req.query.number)
     if(isNaN(num)){
         return res.status(400).json({
@@ -79,7 +79,7 @@ app.get('/api/classify-number', (req, res)=>{
         "is_perfect": perfectNumber(num),
         "properties": isArmstrongEvenOrOdd(num),
         "digit_sum": sumOfDigits(num),  // sum of its digits
-        "fun_fact": generateFunFact(num)
+        "fun_fact": await generateFunFact(num)
     }
 
     res.status(200).json(properties)
