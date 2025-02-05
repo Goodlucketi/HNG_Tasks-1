@@ -7,7 +7,7 @@ The function that checks for prime numbers
 the function that checks for armstrong numbers, even and odd numbers
 the function that checks for perfect numbers
 function that returns the sum of the digits of a number
-and also a function that dynamically creates fun facts for numbers depending on their prooperties.
+and also an API from http://numbersapi.com/ that returns number facts for each number.
 
 API Endpoint URL: https://hng-tasks-1-npan.onrender.com/api/classify-number?number=501
 
