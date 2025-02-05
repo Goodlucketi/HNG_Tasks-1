@@ -30,7 +30,7 @@ function isArmstrongEvenOrOdd(num){
     if(isArmStrong){
         return isEven ? ["Armstrong", "Even"] : ["Armstrong", "Odd"]
     }else{
-        return isEven ? ["Not Armstrong", "Even"] : ["Not Armstrong", "Odd"]
+        return isEven ? ["Even"] : ["Odd"]
     }
 }
 
