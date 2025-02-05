@@ -65,16 +65,14 @@ app.get('/', (req, res)=> {
 })
 
 app.get('/api/classify-number', async (req, res)=>{
-    let numStr = req.query.number;
+    let num = Number(req.query.number)
     
-    if (!/^\d+$/.test(numStr)) {
+    if(isNaN(num)){
         return res.status(400).json({
             "number": "alphabet",
             "error": true
-        });
+        })
     }
-    
-    let num = parseInt(numStr)
 
     let properties = {
         "number": num,
